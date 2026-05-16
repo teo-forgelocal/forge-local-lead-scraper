@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Secrets — NEVER commit these
+.env
+*.json
+credentials/
+secrets/
+
+# Mac system files
+.DS_Store
+
+# VS Code workspace settings
+.vscode/
+
+# Logs
+*.log
