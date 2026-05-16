@@ -1,0 +1,26 @@
+# Forge Local — Today's Run Config
+#
+# Edit this file BEFORE the daily run to override defaults.
+# Leave a field blank or remove it to use the fallback from the queue files.
+#
+# Examples:
+#   - To target Tier 1 dentists in Colorado:
+#       state: Colorado
+#       niche: dentists
+#       tier: 1
+#
+#   - To let the agent autopilot (use queue files):
+#       state:
+#       niche:
+#       tier:
+#
+# auto_tier_advance: when true, the agent will escalate T1 → T2 → T3
+# in the current state before advancing to the next state.
+# When false, the agent stays at the chosen tier and advances state
+# as soon as that tier is exhausted in the current state.
+
+state:
+niche:
+tier:
+max_leads: 200
+auto_tier_advance: true

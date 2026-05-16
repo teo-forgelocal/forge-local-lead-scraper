@@ -1,0 +1,96 @@
+# Forge Local — Niche Queue
+#
+# Edit this list to add, remove, or reorder niches.
+# Lines starting with # are comments (ignored by the agent).
+# Blank lines are also ignored.
+#
+# The agent uses the first non-comment, non-blank niche by default,
+# but if config/today.yaml specifies a niche, that overrides this file.
+#
+# Alphabetical within each category for easy scanning.
+
+# === Home services ===
+appliance repair
+cabinet makers
+carpet cleaners
+chimney sweeps
+cleaning services
+concrete contractors
+deck builders
+electricians
+fence contractors
+flooring contractors
+garage door services
+handyman services
+hvac contractors
+junk removal
+landscapers
+lawn care
+locksmiths
+moving companies
+painters
+pest control
+plumbers
+pool services
+pressure washing
+roofers
+solar installers
+tree services
+welders
+window cleaners
+
+# === Auto ===
+auto body shops
+auto detailers
+auto repair shops
+mobile detailers
+mobile mechanics
+
+# === Personal care & wellness ===
+acupuncturists
+barbers
+chiropractors
+day spas
+dentists
+fitness trainers
+massage therapists
+nail salons
+optometrists
+physical therapists
+salons
+tattoo studios
+yoga studios
+
+# === Pet services ===
+dog groomers
+dog trainers
+veterinarians
+
+# === Food & beverage ===
+bakeries
+bartending services
+catering services
+food trucks
+private chefs
+
+# === Events & creative ===
+bridal shops
+event planners
+florists
+photographers
+videographers
+
+# === Professional services ===
+bail bondsmen
+estate planners
+financial advisors
+funeral homes
+insurance agents
+law firms
+personal injury lawyers
+real estate agents
+tax preparers
+
+# === Retail ===
+boutiques
+dry cleaners
