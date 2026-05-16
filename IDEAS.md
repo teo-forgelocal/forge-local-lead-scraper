@@ -12,10 +12,22 @@ Revisit this list when planning V2 / the dashboard.
 - Multi-tenant: invite team members to a shared workspace
 
 ## Lead pipeline ideas
-- Email enrichment integration (Hunter, Apollo, Dropcontact)
-- Direct GoHighLevel CRM integration
-- Automated demo-site generation per lead
-- Outreach sequences from warmed dedicated domain
+- **Email enrichment (Phase 5 / post-validation):**
+  - Why: Google Places API does not return business emails by policy.
+  - Approach: After 1-2 weeks of running the agent, evaluate lead quality.
+    If keepers/day > ~20 and worth pursuing, add Hunter.io, Apollo.io, or
+    Dropcontact integration as a step between scrape() and write_to_sheet().
+  - Cost: $34-49/month minimum for usable hit rates on small businesses.
+  - Hit rate expectation: 20-40% for sub-150k city local businesses.
+  - Until then: manually look up emails for ~10-20 keepers/day via
+    Apollo free tier (60/mo) or contact-page scraping.
+- Optional: scrape business websites for `info@` / `contact@` emails as
+  a free bonus enrichment step (catches the easy ones, ~50% coverage at best
+  since target leads often have no website).
+- Direct GoHighLevel CRM integration (push keeper leads via GHL API).
+- Automated demo-site generation per keeper lead (Claude generates HTML
+  template with their logo from Google Maps + business name).
+- Outreach sequences from warmed dedicated domain (NOT GHL bulk sender).
 
 ## Product/marketing
 - TikTok build-in-public series
