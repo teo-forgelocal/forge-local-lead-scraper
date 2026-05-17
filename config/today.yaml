@@ -1,5 +1,5 @@
 state: Arkansas
 niche: barbers
 tier: 1
-max_leads: 30
+max_leads: 200
 auto_tier_advance: true
