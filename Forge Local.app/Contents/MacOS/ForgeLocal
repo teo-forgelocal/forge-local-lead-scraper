@@ -1,0 +1,4 @@
+#!/bin/bash
+# Mac app entry point — opens Terminal and runs the launcher.
+SCRIPT_PATH="/Users/teo./Developer/forge-local/launch_forge.sh"
+open -a Terminal "$SCRIPT_PATH"
