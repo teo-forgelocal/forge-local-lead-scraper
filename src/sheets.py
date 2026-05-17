@@ -41,9 +41,11 @@ from scorer import ScoredBusiness, Bucket
 
 
 # OAuth scopes — what permissions we'll request from the user
+# Must include Gmail send too, so a single token covers all our needs.
 SCOPES = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive",
+    "https://www.googleapis.com/auth/gmail.send",
 ]
 
 # Column layout — order matters for the spreadsheet
