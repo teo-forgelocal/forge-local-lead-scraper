@@ -3,6 +3,34 @@
 Capture ideas here as they come up. Don't act on them mid-build.
 Revisit this list when planning V2 / the dashboard.
 
+## 🚨 MUST FIX BEFORE BETA LAUNCH
+
+### Business-level deduplication
+**Status:** Critical bug. Currently only city-level dedup exists.
+
+**The problem:** Agent tracks which cities it has scraped, but NOT which 
+individual businesses. If buyers run the agent multiple times per day, or 
+if cities overlap geographically (e.g. Springdale + Fayetteville), they 
+will receive the same businesses in multiple sheets. This will FRUSTRATE 
+buyers and damage trust during pre-launch.
+
+**The fix:**
+1. Add a `seen_businesses` storage layer (SQLite for local v1, Supabase 
+   for SaaS).
+2. Store every Google Place ID returned by the scraper, per user.
+3. Before adding a business to today's output, check if its Place ID is 
+   already in the user's history. If yes, skip.
+4. Add option for buyer to set "dedup window" — e.g. "show me businesses 
+   I haven't seen in the last 30 days" vs "ever."
+
+**Effort:** ~30-45 minutes of code.
+
+**Priority:** P0 — must ship before any beta testers get access.
+
+**Why this matters:** A buyer running the agent daily will hit duplicates 
+within 1-2 weeks. They will think the product is broken. They will 
+churn. They will not buy again.
+
 ## V2 candidates (dashboard era)
 - Web dashboard with login
 - Run history view (cities + states already scraped)

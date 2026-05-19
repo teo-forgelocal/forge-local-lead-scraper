@@ -149,9 +149,15 @@ def send_daily_report(scored, niche, city, state, tier, sheet_url, to_email, ver
 
     body_html = _build_html_email(scored, niche, city, state, tier, sheet_url)
 
+    # Sender configuration — must match a verified "Send mail as" address
+    # in the Gmail account that the OAuth token belongs to (hello@forgelocal.app).
+    SENDER_NAME = "Forge Local Agent"
+    SENDER_EMAIL = "leadagent@forgelocal.app"
+
     message = MIMEMultipart("alternative")
-    message["to"] = to_email
-    message["subject"] = subject
+    message["From"] = f"{SENDER_NAME} <{SENDER_EMAIL}>"
+    message["To"] = to_email
+    message["Subject"] = subject
     message.attach(MIMEText(body_html, "html"))
 
     raw = base64.urlsafe_b64encode(message.as_bytes()).decode()
