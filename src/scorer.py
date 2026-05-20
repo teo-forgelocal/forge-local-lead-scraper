@@ -43,9 +43,9 @@ from scraper import Business
 # ───────────────────────── Bucket definitions ─────────────────────────
 
 class Bucket(str, Enum):
-    HOT = "🔴 HOT"
-    WARM = "🟠 WARM"
-    COOL = "🟡 COOL"
+    HOT = "temp:hot"
+    WARM = "temp:warm"
+    COOL = "temp:cool"
 
 
 # ───────────────────────── Fake-website host patterns ─────────────────────────

@@ -242,9 +242,9 @@ def run_full(to_email: str) -> None:
     by_bucket = {Bucket.HOT: 0, Bucket.WARM: 0, Bucket.COOL: 0}
     for s in scored:
         by_bucket[s.bucket] += 1
-    _info(f"🔴 HOT: {by_bucket[Bucket.HOT]}   "
-          f"🟠 WARM: {by_bucket[Bucket.WARM]}   "
-          f"🟡 COOL: {by_bucket[Bucket.COOL]}")
+    _info(f"temp:hot: {by_bucket[Bucket.HOT]}   "
+          f"temp:warm: {by_bucket[Bucket.WARM]}   "
+          f"temp:cool: {by_bucket[Bucket.COOL]}")
 
     # Phase 3 — Sheet
     _banner("📊 PHASE 3: Creating Google Sheet")
