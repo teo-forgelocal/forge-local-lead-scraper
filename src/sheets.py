@@ -59,7 +59,6 @@ COLUMNS = [
     ("Reason", 320),
     ("Rating", 70),
     ("Reviews", 80),
-    ("Maps", 80),
 ]
 
 # Background colors for each bucket (Google Sheets accepts RGB 0-1 floats)
@@ -234,7 +233,6 @@ def _data_row(sb: ScoredBusiness) -> list:
         sb.reason,
         b.rating if b.rating else "",
         b.review_count if b.review_count else "",
-        f'=HYPERLINK("{b.google_maps_url}","Map")' if b.google_maps_url else "",
     ]
 
 

@@ -40,7 +40,6 @@ PLACES_FIELDS = ",".join([
     "places.id",
     "places.displayName",
     "places.formattedAddress",
-    "places.googleMapsUri",
     "places.businessStatus",
     # Contact
     "places.internationalPhoneNumber",
@@ -58,7 +57,6 @@ class Business:
     place_id: str
     name: str
     address: str
-    google_maps_url: str
     phone: Optional[str] = None
     website: Optional[str] = None
     rating: Optional[float] = None
@@ -72,7 +70,6 @@ class Business:
             place_id=place.get("id", ""),
             name=place.get("displayName", {}).get("text", ""),
             address=place.get("formattedAddress", ""),
-            google_maps_url=place.get("googleMapsUri", ""),
             phone=place.get("nationalPhoneNumber") or place.get("internationalPhoneNumber"),
             website=place.get("websiteUri"),
             rating=place.get("rating"),

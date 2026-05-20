@@ -130,7 +130,6 @@ class ScoredBusiness:
             "rating": b.rating if b.rating else "",
             "review_count": b.review_count if b.review_count else "",
             "business_status": b.business_status or "",
-            "google_maps_url": b.google_maps_url,
             "place_id": b.place_id,
         }
 
