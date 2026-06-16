@@ -59,6 +59,7 @@ class Business:
     address: str
     phone: Optional[str] = None
     website: Optional[str] = None
+    email: Optional[str] = None  # not from Places — filled in later by email_finder
     rating: Optional[float] = None
     review_count: Optional[int] = None
     business_status: Optional[str] = None  # OPERATIONAL / CLOSED_TEMPORARILY / CLOSED_PERMANENTLY

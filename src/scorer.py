@@ -124,6 +124,7 @@ class ScoredBusiness:
             "name": b.name,
             "address": b.address,
             "phone": b.phone or "",
+            "email": b.email or "",
             "website": b.website or "",
             "site_status": self.site_status,
             "reason": self.reason,

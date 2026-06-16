@@ -40,6 +40,7 @@ from picker import (
     TODAY_YAML_PATH,
 )
 from scraper import scrape_businesses
+from email_finder import enrich_with_emails
 from scorer import score_businesses, Bucket
 from sheets import create_leads_sheet
 from emailer import send_daily_report
@@ -235,6 +236,16 @@ def run_full(to_email: str) -> None:
 
     print()
     _info(f"Total leads scraped: {len(all_businesses)} across {len(cities_scraped)} cities.")
+
+    # Phase 1.5 — Enrich with emails (scrape each business's own website)
+    # Places gives us phone but not email; CRM import needs email where it exists.
+    _banner("✉️  PHASE 1.5: Finding emails")
+    with_site = sum(1 for b in all_businesses if b.website)
+    _info(f"Visiting {with_site} business websites to extract contact emails...")
+    found = enrich_with_emails(all_businesses, verbose=False)
+    rate = (found / with_site * 100) if with_site else 0
+    _info(f"Found {found} emails ({rate:.0f}% of {with_site} with a website).")
+    _info(f"{len(all_businesses) - with_site} have no website — reached by phone instead.")
 
     # Phase 2 — Score
     _banner("⚖️  PHASE 2: Scoring websites")

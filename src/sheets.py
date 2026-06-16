@@ -55,6 +55,7 @@ COLUMNS = [
     ("Name", 220),
     ("Address", 280),
     ("Phone", 130),
+    ("Email", 220),
     ("Website", 280),
     ("Reason", 320),
     ("Rating", 70),
@@ -229,6 +230,7 @@ def _data_row(sb: ScoredBusiness) -> list:
         b.name,
         b.address,
         b.phone or "",
+        b.email or "",
         b.website or "",
         sb.reason,
         b.rating if b.rating else "",
@@ -338,6 +340,7 @@ if __name__ == "__main__":
 
     from scraper import scrape_businesses
     from scorer import score_businesses
+    from email_finder import enrich_with_emails
 
     niche = sys.argv[1]
     city = sys.argv[2]
@@ -349,6 +352,14 @@ if __name__ == "__main__":
     print(f"PHASE 1: Scraping")
     print("─" * 60)
     businesses = scrape_businesses(niche, city, state, max_results=max_results)
+
+    print()
+    print("─" * 60)
+    print(f"PHASE 1.5: Finding emails")
+    print("─" * 60)
+    found = enrich_with_emails(businesses, verbose=False)
+    with_site = sum(1 for b in businesses if b.website)
+    print(f"   Found {found} emails among {with_site} businesses with a website.")
 
     print()
     print("─" * 60)
