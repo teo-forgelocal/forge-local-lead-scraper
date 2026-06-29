@@ -162,11 +162,20 @@ def create_leads_sheet(
     # With OAuth, the sheet is owned by the user, so the storage quota issue
     # we hit with service accounts doesn't apply.
     folder_id = os.environ.get("GOOGLE_DRIVE_FOLDER_ID")
+    spreadsheet = None
     if folder_id:
-        spreadsheet = client.create(title, folder_id=folder_id)
-        if verbose:
-            print(f"   Sheet created in Drive folder. ID: {spreadsheet.id}")
-    else:
+        try:
+            spreadsheet = client.create(title, folder_id=folder_id)
+            if verbose:
+                print(f"   Sheet created in Drive folder. ID: {spreadsheet.id}")
+        except Exception as e:
+            # A bad/inaccessible GOOGLE_DRIVE_FOLDER_ID — e.g. a folder owned by
+            # a different Google account than the one authorized — must NOT kill
+            # the whole run after the scrape + API spend. Fall back to My Drive.
+            print(f"   ⚠️  GOOGLE_DRIVE_FOLDER_ID not usable ({type(e).__name__}: "
+                  f"folder missing or owned by another account) — saving to My Drive instead.")
+            spreadsheet = None
+    if spreadsheet is None:
         spreadsheet = client.create(title)
         if verbose:
             print(f"   Sheet created in My Drive. ID: {spreadsheet.id}")
