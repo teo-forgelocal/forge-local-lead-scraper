@@ -347,8 +347,12 @@ def _fetch_site(url: str, verbose: bool = False) -> dict:
     # Copyright year detection — look for "© 20XX" patterns
     # If the most recent year on the page is < 2020, flag as outdated.
     copyright_years = re.findall(r"(?:©|copyright|&copy;)\s*(\d{4})", html)
-    if copyright_years:
-        latest_year = max(int(y) for y in copyright_years if 1990 <= int(y) <= 2030)
+    # Keep only plausible years FIRST — a page can have a 4-digit match outside
+    # this range (e.g. "© 1885" founding year), which would leave nothing to
+    # max() over and crash. Guard against the empty case.
+    valid_years = [int(y) for y in copyright_years if 1990 <= int(y) <= 2030]
+    if valid_years:
+        latest_year = max(valid_years)
         if latest_year < 2020:
             result["old_copyright_year"] = latest_year
 
@@ -367,7 +371,20 @@ def score_businesses(businesses: list[Business], verbose: bool = False) -> list[
     for i, biz in enumerate(businesses, 1):
         if verbose:
             print(f"\n[{i}/{len(businesses)}] Scoring: {biz.name}")
-        scored.append(score_business(biz, verbose=verbose))
+        try:
+            scored.append(score_business(biz, verbose=verbose))
+        except Exception as e:
+            # A single weird site must never abort the whole run (and lose the
+            # API spend). Keep the lead, flag it for manual review.
+            print(f"⚠️  Scoring failed for {biz.name}: {type(e).__name__} — flagged for review",
+                  file=sys.stderr)
+            scored.append(ScoredBusiness(
+                business=biz,
+                bucket=Bucket.WARM,
+                score=50,
+                reason=f"Scoring error ({type(e).__name__}) — review manually",
+                site_status="error",
+            ))
 
     # Sort: hotter buckets first, then higher score within bucket
     bucket_order = {Bucket.HOT: 0, Bucket.WARM: 1, Bucket.COOL: 2}
