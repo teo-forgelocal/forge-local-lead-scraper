@@ -67,7 +67,7 @@ def _get_gmail_service():
             flow = InstalledAppFlow.from_client_secrets_file(
                 str(full_client_path), SCOPES
             )
-            creds = flow.run_local_server(port=0)
+            creds = flow.run_local_server(port=0, prompt="select_account")
 
         full_token_path.parent.mkdir(parents=True, exist_ok=True)
         full_token_path.write_text(creds.to_json())

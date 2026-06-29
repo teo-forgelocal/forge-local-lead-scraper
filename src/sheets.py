@@ -125,7 +125,9 @@ def _get_client() -> gspread.Client:
             )
             # run_local_server opens a browser and listens on localhost:0
             # for the callback. User clicks Allow → token comes back.
-            creds = flow.run_local_server(port=0)
+            # prompt="select_account" forces Google's account chooser so the
+            # user can't silently re-auth as the wrong account.
+            creds = flow.run_local_server(port=0, prompt="select_account")
 
         # Save token for next time
         full_token_path.parent.mkdir(parents=True, exist_ok=True)
