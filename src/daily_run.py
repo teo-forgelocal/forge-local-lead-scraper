@@ -44,6 +44,7 @@ from email_finder import enrich_with_emails
 from scorer import score_businesses, Bucket
 from sheets import create_leads_sheet
 from emailer import send_daily_report
+from ghl import push_leads
 
 
 # ───────────────────────── Pretty CLI helpers ─────────────────────────
@@ -287,6 +288,10 @@ def run_full(to_email: str) -> None:
         sheet_url=sheet_url,
         to_email=to_email,
     )
+
+    # Phase 5 — Push to GHL (opt-in; skipped automatically if GHL_API_TOKEN isn't set)
+    _banner("📥 PHASE 5: Pushing to GHL")
+    push_leads(scored, state=primary_state, niche=niche, verbose=True)
 
     # Done
     print()
