@@ -187,14 +187,15 @@
     <li><em>(Recommended)</em> Click <strong>Edit API key</strong> → under <strong>API restrictions</strong> choose <strong>Restrict key</strong> → check <strong>Places API (New)</strong> → <strong>Save</strong>. This keeps the key safe.</li>
   </ol>
 
-  <h3>4.5 — Set up the OAuth consent screen</h3>
+  <h3>4.5 — Set up the consent screen — choose “Internal”</h3>
+  <div class="callout warn"><span class="ic">⚠️</span>First confirm you're signed into Google Cloud with your <span class="pill">@forgelocal.app</span> account (top-right) — <strong>not</strong> a personal Gmail. “Internal” only works with your company account.</div>
   <ol class="steps">
-    <li>Top search bar → <strong>OAuth consent screen</strong> → open it.</li>
-    <li>Choose <strong>External</strong> → <strong>Create</strong>.</li>
-    <li>Fill in <strong>App name</strong> (<span class="pill">Forge Local</span>), <strong>User support email</strong> (yours), and <strong>Developer contact email</strong> (yours). Click <strong>Save and Continue</strong> through the next screens — you can skip “Scopes.”</li>
-    <li>On the <strong>Test users</strong> step, click <strong>+ Add Users</strong>, type <strong>your own Google email</strong>, and add it. <strong>Save and Continue.</strong></li>
+    <li>Top search bar → <strong>OAuth consent screen</strong> (newer console: <strong>“Google Auth Platform” → “Audience”</strong>) → open it.</li>
+    <li>For <strong>User type / Audience</strong>, choose <strong>Internal</strong> → <strong>Create</strong>.</li>
+    <li>Fill in <strong>App name</strong> (<span class="pill">Forge Local</span>), <strong>User support email</strong> (yours), and <strong>Developer contact email</strong> (yours), then <strong>Save</strong>. You can skip “Scopes,” and with Internal there's <strong>no Test users step</strong>.</li>
   </ol>
-  <div class="callout tip"><span class="ic">💡</span>Leaving it in “Testing” mode is correct. The only side effect: about <strong>once a week</strong> Google will ask you to sign in again (one click). That's normal — see Part 7.</div>
+  <div class="callout tip"><span class="ic">💡</span><strong>Why Internal (this matters):</strong> any <span class="pill">@forgelocal.app</span> account can sign in, there's <strong>no weekly re-auth</strong>, and you skip Google's verification process entirely. Picking “External” instead is what causes the weekly lockout — so use Internal.</div>
+  <div class="callout warn"><span class="ic">⚠️</span>If <strong>Internal</strong> is greyed out, you're either signed in with a personal account or the project isn't under the company org. Sign in with your <span class="pill">@forgelocal.app</span> account and retry, or ping Teo.</div>
 
   <h3>4.6 — Create &amp; download the OAuth client file</h3>
   <ol class="steps">
@@ -249,9 +250,9 @@ REPORT_EMAIL=neema@forgelocal.app</div>
   <ol class="steps">
     <li>Double-click <strong>Forge Leads</strong> on your Desktop.</li>
     <li>Type <strong>2</strong> to set this week's region/niche (or <strong>1</strong> to reuse last week's), press <strong>Return</strong>.</li>
-    <li>If Google asks you to sign in again, do it (one click — see note). Then let it run and open your Sheet.</li>
+    <li>Let it run and open your Sheet. With the Internal setup, you usually won't be asked to sign in again.</li>
   </ol>
-  <div class="callout tip"><span class="ic">🔁</span><strong>The weekly sign-in is expected.</strong> Because the app is in “Testing” mode, Google logs you out about once a week. When that happens, the browser just pops open again — pick your account, <strong>Allow</strong>, done. Nothing is broken.</div>
+  <div class="callout tip"><span class="ic">🔁</span><strong>No weekly sign-in.</strong> Because the app is <strong>Internal</strong> (not “Testing”), your login sticks — you shouldn't get logged out every week. If Google ever does ask, just pick your <span class="pill">@forgelocal.app</span> account and <strong>Allow</strong> — one click, done.</div>
   </section>
 
   <!-- TROUBLESHOOTING -->
@@ -261,7 +262,7 @@ REPORT_EMAIL=neema@forgelocal.app</div>
     <tr><th>What you see</th><th>What to do</th></tr>
     <tr><td>“cannot be opened — unidentified developer”</td><td>Right-click the file → <strong>Open</strong> → <strong>Open</strong>. For the Desktop icon: <strong>System Settings → Privacy &amp; Security → Open Anyway</strong>. One time each.</td></tr>
     <tr><td>“command not found: python”</td><td>You're typing in the wrong place — just use the <strong>Forge Leads</strong> Desktop icon, which handles this for you.</td></tr>
-    <tr><td>Browser keeps asking me to sign in</td><td>Normal — about once a week (Part 7). One click and you're back.</td></tr>
+    <tr><td>Browser keeps asking me to sign in</td><td>With the Internal setup this is rare — pick your <span class="pill">@forgelocal.app</span> account and Allow. If it happens on <em>every</em> run, your app is likely set to "External/Testing" instead of Internal — recheck Part 4.5.</td></tr>
     <tr><td>“GOOGLE_MAPS_API_KEY not found”</td><td>Your <span class="pill">.env</span> is missing the key, or wasn't saved. Redo Part 5.2 and make sure you pressed Save.</td></tr>
     <tr><td>API error about billing / “REQUEST_DENIED”</td><td>Billing isn't linked or <strong>Places API (New)</strong> isn't enabled. Recheck Parts 4.2 and 4.3.</td></tr>
     <tr><td>Lots of blank emails</td><td>Expected — only ~1 in 3 sites expose an email. Use the phone number for the rest.</td></tr>
