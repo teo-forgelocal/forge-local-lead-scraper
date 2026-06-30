@@ -48,6 +48,11 @@ SCOPES = [
     "https://www.googleapis.com/auth/gmail.send",
 ]
 
+# Tag applied to every exported lead so the manual CSV import into GHL fires the
+# cold-scraper-intake workflow. Keep this string EXACT — spelling, casing, the
+# "flag:" prefix, and the hyphens all must match the GHL workflow trigger.
+INTAKE_TAG = "flag:cold-scraper-intake"
+
 # Column layout — order matters for the spreadsheet
 COLUMNS = [
     ("Bucket", 90),
@@ -60,6 +65,7 @@ COLUMNS = [
     ("Reason", 320),
     ("Rating", 70),
     ("Reviews", 80),
+    ("Tags", 200),
 ]
 
 # Background colors for each bucket (Google Sheets accepts RGB 0-1 floats)
@@ -246,6 +252,7 @@ def _data_row(sb: ScoredBusiness) -> list:
         sb.reason,
         b.rating if b.rating else "",
         b.review_count if b.review_count else "",
+        INTAKE_TAG,
     ]
 
 
