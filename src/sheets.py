@@ -252,7 +252,11 @@ def _data_row(sb: ScoredBusiness) -> list:
         sb.reason,
         b.rating if b.rating else "",
         b.review_count if b.review_count else "",
-        INTAKE_TAG,
+        # GHL only allows ONE column mapped to its Tags field, so pack every tag
+        # into this one cell, comma-separated — GHL splits it into separate tags
+        # on import. No space after the comma so tags import clean (no leading
+        # whitespace). INTAKE_TAG stays first so the workflow-trigger tag is exact.
+        f"{INTAKE_TAG},{sb.bucket.value}",
     ]
 
 
